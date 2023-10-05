@@ -6,7 +6,7 @@ import joblib
 app = FastAPI()
 
 # Load the model from the correct file name
-classifier = joblib.load('LR.pkl')
+classifier = joblib.load('LRR.pkl')
 
 def classify(num):
     if num == 0:
