@@ -26,7 +26,7 @@ class InternetServiceEnum(str, Enum):
 class OnlineSecurityEnum(str, Enum):
     Yes = "Yes"
     No = "No"
-    No internet service = "No internet service"
+    No_internet_service = "No internet service"
 
 class ContractEnum(str, Enum):
     MonthToMonth = "Month-to-month"
