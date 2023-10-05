@@ -23,6 +23,11 @@ class InternetServiceEnum(str, Enum):
     FiberOptic = "Fiber optic"
     No = "No"
 
+class OnlineSecurityEnum(str, Enum):
+    Yes = "Yes"
+    No = "No"
+    internet service= "internet service"  
+
 class ContractEnum(str, Enum):
     MonthToMonth = "Month-to-month"
     OneYear = "One year"
@@ -44,13 +49,13 @@ async def predict_churn(
     Partner: YesNoEnum = Query(..., description="Do You Have a Partner?"),
     Dependents: YesNoEnum = Query(..., description="Do You Have a Dependent?"),
     tenure: int = Query(..., description="How Long Have You Been with Vodafone in Months?"),
-    InternetService: InternetServiceEnum = Query(..., description="Internet Service Type"),
-    OnlineSecurity: InternetServiceEnum = Query(..., description="Online Security"),
-    OnlineBackup: InternetServiceEnum = Query(..., description="Online Backup"),
-    DeviceProtection: InternetServiceEnum = Query(..., description="Device Protection"),
-    TechSupport: InternetServiceEnum = Query(..., description="Tech Support"),
-    StreamingTV: InternetServiceEnum = Query(..., description="Streaming TV"),
-    StreamingMovies: InternetServiceEnum = Query(..., description="Streaming Movies"),
+    InternetService: OnlineSecurityEnum= Query(..., description="Internet Service Type"),
+    OnlineSecurity: OnlineSecurityEnum = Query(..., description="Online Security"),
+    OnlineBackup: OnlineSecurityEnum = Query(..., description="Online Backup"),
+    DeviceProtection: OnlineSecurityEnum = Query(..., description="Device Protection"),
+    TechSupport: IOnlineSecurityEnum = Query(..., description="Tech Support"),
+    StreamingTV: OnlineSecurityEnum = Query(..., description="Streaming TV"),
+    StreamingMovies: OnlineSecurityEnum = Query(..., description="Streaming Movies"),
     Contract: ContractEnum = Query(..., description="Contract Type"),
     PaperlessBilling: YesNoEnum = Query(..., description="Paperless Billing"),
     PaymentMethod: PaymentMethodEnum = Query(..., description="Payment Method"),
