@@ -50,7 +50,7 @@ async def predict_churn(
     Dependents: YesNoEnum = Query(..., description="Do You Have a Dependent?"),
     tenure: int = Query(..., description="How Long Have You Been with Vodafone in Months?"),
     InternetService: InternetServiceEnum = Query(..., description="Internet Service Type"),
-    OnlineSecurity: IOnlineSecurityEnum = Query(..., description="Online Security"),
+    OnlineSecurity: OnlineSecurityEnum = Query(..., description="Online Security"),
     OnlineBackup: OnlineSecurityEnum = Query(..., description="Online Backup"),
     DeviceProtection: OnlineSecurityEnum = Query(..., description="Device Protection"),
     TechSupport: OnlineSecurityEnum = Query(..., description="Tech Support"),
