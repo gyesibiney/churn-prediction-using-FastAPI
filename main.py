@@ -8,7 +8,7 @@ import pandas as pd
 app = FastAPI()
 
 # Load the model from the correct file name
-classifier = joblib.load('LR.pkl')
+classifier = joblib.load('LRR.pkl')
 
 
 class ChurnPredictionInput(BaseModel):
