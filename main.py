@@ -1,17 +1,38 @@
 from fastapi import FastAPI, Query
+from enum import Enum
 import pandas as pd
 import joblib
 
 app = FastAPI()
 
 # Load the model from the correct file name
-classifier = joblib.load('LRR.pkl')
+classifier = joblib.load('LR.pkl')
 
 def classify(num):
     if num == 0:
         return "Customer will not Churn"
     else:
         return "Customer will churn"
+
+class YesNoEnum(str, Enum):
+    Yes = "Yes"
+    No = "No"
+
+class InternetServiceEnum(str, Enum):
+    DSL = "DSL"
+    FiberOptic = "Fiber optic"
+    No = "No"
+
+class ContractEnum(str, Enum):
+    MonthToMonth = "Month-to-month"
+    OneYear = "One year"
+    TwoYear = "Two year"
+
+class PaymentMethodEnum(str, Enum):
+    ElectronicCheck = "Electronic check"
+    MailedCheck = "Mailed check"
+    BankTransfer = "Bank transfer (automatic)"
+    CreditCard = "Credit card (automatic)"
 
 @app.get("/")
 async def read_root():
@@ -20,27 +41,27 @@ async def read_root():
 @app.get("/predict/")
 async def predict_churn(
     SeniorCitizen: int = Query(..., description="Select 1 for Yes and 0 for No"),
-    Partner: str = Query(..., description="Do You Have a Partner? (Yes/No)"),
-    Dependents: str = Query(..., description="Do You Have a Dependent? (Yes/No)"),
+    Partner: YesNoEnum = Query(..., description="Do You Have a Partner?"),
+    Dependents: YesNoEnum = Query(..., description="Do You Have a Dependent?"),
     tenure: int = Query(..., description="How Long Have You Been with Vodafone in Months?"),
-    InternetService: str = Query(..., description="Internet Service Type (DSL/Fiber optic/No)"),
-    OnlineSecurity: str = Query(..., description="Online Security (Yes/No/No internet service)"),
-    OnlineBackup: str = Query(..., description="Online Backup (Yes/No/No internet service)"),
-    DeviceProtection: str = Query(..., description="Device Protection (Yes/No/No internet service)"),
-    TechSupport: str = Query(..., description="Tech Support (Yes/No/No internet service)"),
-    StreamingTV: str = Query(..., description="Streaming TV (Yes/No/No internet service)"),
-    StreamingMovies: str = Query(..., description="Streaming Movies (Yes/No/No internet service)"),
-    Contract: str = Query(..., description="Contract Type (Month-to-month/One year/Two year)"),
-    PaperlessBilling: str = Query(..., description="Paperless Billing (Yes/No)"),
-    PaymentMethod: str = Query(..., description="Payment Method (Electronic check/Mailed check/Bank transfer (automatic)/Credit card (automatic))"),
+    InternetService: InternetServiceEnum = Query(..., description="Internet Service Type"),
+    OnlineSecurity: InternetServiceEnum = Query(..., description="Online Security"),
+    OnlineBackup: InternetServiceEnum = Query(..., description="Online Backup"),
+    DeviceProtection: InternetServiceEnum = Query(..., description="Device Protection"),
+    TechSupport: InternetServiceEnum = Query(..., description="Tech Support"),
+    StreamingTV: InternetServiceEnum = Query(..., description="Streaming TV"),
+    StreamingMovies: InternetServiceEnum = Query(..., description="Streaming Movies"),
+    Contract: ContractEnum = Query(..., description="Contract Type"),
+    PaperlessBilling: YesNoEnum = Query(..., description="Paperless Billing"),
+    PaymentMethod: PaymentMethodEnum = Query(..., description="Payment Method"),
     MonthlyCharges: float = Query(..., description="Monthly Charges"),
     TotalCharges: float = Query(..., description="Total Charges")
 ):
     input_data = [
-        SeniorCitizen, Partner, Dependents, tenure, InternetService,
-        OnlineSecurity, OnlineBackup, DeviceProtection, TechSupport,
-        StreamingTV, StreamingMovies, Contract, PaperlessBilling,
-        PaymentMethod, MonthlyCharges, TotalCharges
+        SeniorCitizen, Partner.value, Dependents.value, tenure, InternetService.value,
+        OnlineSecurity.value, OnlineBackup.value, DeviceProtection.value, TechSupport.value,
+        StreamingTV.value, StreamingMovies.value, Contract.value, PaperlessBilling.value,
+        PaymentMethod.value, MonthlyCharges, TotalCharges
     ]
 
     input_df = pd.DataFrame([input_data], columns=[
@@ -58,4 +79,3 @@ async def predict_churn(
     }
 
     return response
-
