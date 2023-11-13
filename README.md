@@ -4,7 +4,7 @@
 
 |  | Project's Name | Article Link    | Deployment Link  |
 |:--:|:--------------:|:--------------:|:--------------:|
-| 1 |  -Embedding a Machine Learning Model into a Web Application             |  (https://medium.com/@david.biney/performing-sentiment-analysis-on-movie-reviews-using-fastapi-docker-and-huggingface-8d02d4091482) | ([https://gyesibiney-sentiment-movie-review-fastapi-2.hf.space/docs](https://gyesibiney-churn-prediction-using-fastapi.hf.space/docs#/default/predict_churn_predict__get)) |
+| 1 |  -Embedding a Machine Learning Model into a Web Application             |  (https://medium.com/@david.biney/embark-on-your-tech-journey-building-a-fastapi-app-with-docker-for-customer-attrition-f0491d075049) | ([https://gyesibiney-sentiment-movie-review-fastapi-2.hf.space/docs](https://gyesibiney-churn-prediction-using-fastapi.hf.space/docs#/default/predict_churn_predict__get)) |
 
 
 # Sentiment-movie-review APP using FASTAPI ✨
